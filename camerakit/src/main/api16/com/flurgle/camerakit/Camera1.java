@@ -162,24 +162,29 @@ public class Camera1 extends CameraImpl {
 
     @Override
     void setFlash(@Flash int flash) {
-        if (mCameraParameters != null) {
-            List<String> flashes = mCameraParameters.getSupportedFlashModes();
-            String internalFlash = new ConstantMapper.Flash(flash).map();
-            if (flashes != null && flashes.contains(internalFlash)) {
-                mCameraParameters.setFlashMode(internalFlash);
-                mFlash = flash;
-            } else {
-                String currentFlash = new ConstantMapper.Flash(mFlash).map();
-                if (flashes == null || !flashes.contains(currentFlash)) {
-                    mCameraParameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
-                    mFlash = FLASH_OFF;
-                }
-            }
+        //disable flash
 
+        mFlash = FLASH_OFF;
+        if (mCameraParameters != null) {
+//            List<String> flashes = mCameraParameters.getSupportedFlashModes();
+//            String internalFlash = new ConstantMapper.Flash(flash).map();
+//            if (flashes != null && flashes.contains(internalFlash)) {
+//                mCameraParameters.setFlashMode(internalFlash);
+//                mFlash = flash;
+//            } else {
+//                String currentFlash = new ConstantMapper.Flash(mFlash).map();
+//                if (flashes == null || !flashes.contains(currentFlash)) {
+//                    mCameraParameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+//                    mFlash = FLASH_OFF;
+//                }
+//            }
+
+            mCameraParameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
             mCamera.setParameters(mCameraParameters);
-        } else {
-            mFlash = flash;
         }
+//        else {
+//            mFlash = flash;
+//        }
     }
 
     @Override
