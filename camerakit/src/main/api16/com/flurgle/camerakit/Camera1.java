@@ -178,9 +178,12 @@ public class Camera1 extends CameraImpl {
 //                    mFlash = FLASH_OFF;
 //                }
 //            }
-
-            mCameraParameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
-            mCamera.setParameters(mCameraParameters);
+            List<String> flashes = mCameraParameters.getSupportedFlashModes();
+            if(flashes != null){
+                mCameraParameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+                mCamera.setParameters(mCameraParameters);
+            }
+            
         }
 //        else {
 //            mFlash = flash;
