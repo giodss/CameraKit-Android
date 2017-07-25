@@ -181,7 +181,13 @@ public class Camera1 extends CameraImpl {
             List<String> flashes = mCameraParameters.getSupportedFlashModes();
             if(flashes != null){
                 mCameraParameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
-                mCamera.setParameters(mCameraParameters);
+                try {
+                    mCamera.setParameters(mCameraParameters);
+                } catch(Exception e) { 
+                    Log.e("Camera Error",e.getLocalizedMessage());
+                    // ...
+                } 
+                
             }
             
         }
