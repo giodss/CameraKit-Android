@@ -372,12 +372,13 @@ public class Camera1 extends CameraImpl {
     // https://github.com/sandrios/sandriosCamera/blob/master/sandriosCamera/src/main/java/com/sandrios/sandriosCamera/internal/manager/impl/Camera1Manager.java#L212
     void initResolutions() {
         List<Size> previewSizes = sizesFromList(mCameraParameters.getSupportedPreviewSizes());
+        List<Size> pictureSizes = sizesFromList(mCameraParameters.getSupportedPictureSizes());
         List<Size> videoSizes = (Build.VERSION.SDK_INT > 10) ? sizesFromList(mCameraParameters.getSupportedVideoSizes()) : previewSizes;
 
         CamcorderProfile camcorderProfile = getCamcorderProfile(mVideoQuality);
 
         mCaptureSize = getSizeWithClosestRatio(
-                (videoSizes == null || videoSizes.isEmpty()) ? previewSizes : videoSizes,
+                pictureSizes,
                 camcorderProfile.videoFrameWidth, camcorderProfile.videoFrameHeight);
 
         mPreviewSize = getSizeWithClosestRatio(previewSizes, mCaptureSize.getWidth(), mCaptureSize.getHeight());
