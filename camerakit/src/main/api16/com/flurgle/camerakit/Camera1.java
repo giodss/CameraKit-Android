@@ -543,14 +543,14 @@ public class Camera1 extends CameraImpl {
         mMediaRecorder.setOrientationHint(calculatePreviewRotation());
         mMediaRecorder.setVideoSize(mCaptureSize.getWidth(), mCaptureSize.getHeight());
 
-        switch (mCameraInfo.orientation) {
-            case SENSOR_ORIENTATION_DEFAULT_DEGREES:
-                mMediaRecorder.setOrientationHint(DEFAULT_ORIENTATION_HINTS.get(mDisplayOrientation));
-                break;
-            case SENSOR_ORIENTATION_INVERSE_DEGREES:
-                mMediaRecorder.setOrientationHint(INVERSE_ORIENTATION_HINTS.get(mDisplayOrientation));
-                break;
-        }
+//         switch (mCameraInfo.orientation) {
+//             case SENSOR_ORIENTATION_DEFAULT_DEGREES:
+//                 mMediaRecorder.setOrientationHint(DEFAULT_ORIENTATION_HINTS.get(mDisplayOrientation));
+//                 break;
+//             case SENSOR_ORIENTATION_INVERSE_DEGREES:
+//                 mMediaRecorder.setOrientationHint(INVERSE_ORIENTATION_HINTS.get(mDisplayOrientation));
+//                 break;
+//         }
     }
 
     public void setProfile(CamcorderProfile profile, boolean audioEnabled) {
