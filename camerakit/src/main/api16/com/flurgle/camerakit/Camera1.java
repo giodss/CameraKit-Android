@@ -454,7 +454,7 @@ public class Camera1 extends CameraImpl {
     }
 
     private int calculateCaptureRotation() {
-        return calculatePreviewRotation();
+         return calculatePreviewRotation();
 //         int previewRotation = calculatePreviewRotation();
 //         if (mCameraInfo.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
 //             //Front is flipped
