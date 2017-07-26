@@ -454,20 +454,19 @@ public class Camera1 extends CameraImpl {
     }
 
     private int calculateCaptureRotation() {
-         return calculatePreviewRotation();
-//         int previewRotation = calculatePreviewRotation();
-//         if (mCameraInfo.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
-//             //Front is flipped
+        int previewRotation = calculatePreviewRotation();
+        if (mCameraInfo.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
+            //Front is flipped
 //             int targetedRotation = previewRotation + 180;
 //             if(targetedRotation != 360){
 //                 return targetedRotation;
 //             }else{
 //                 return 0;   
 //             }
-// //             return (previewRotation + 180 + 2*mDisplayOrientation + 720) %360;
-//         } else {
-//             return previewRotation;
-//         }
+            return (previewRotation + 180 + 2*mDisplayOrientation + 720) %360;
+        } else {
+            return previewRotation;
+        }
     }
 
     private void adjustCameraParameters() {
@@ -541,6 +540,7 @@ public class Camera1 extends CameraImpl {
 
         mVideoFile = new File(mPreview.getView().getContext().getExternalFilesDir(null), "video.mp4");
         mMediaRecorder.setOutputFile(mVideoFile.getAbsolutePath());
+        mMediaRecorder.setOrientationHint(calculatePreviewRotation());
         mMediaRecorder.setVideoSize(mCaptureSize.getWidth(), mCaptureSize.getHeight());
 
         switch (mCameraInfo.orientation) {
