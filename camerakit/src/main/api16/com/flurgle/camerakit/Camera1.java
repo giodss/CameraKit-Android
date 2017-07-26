@@ -540,17 +540,25 @@ public class Camera1 extends CameraImpl {
 
         mVideoFile = new File(mPreview.getView().getContext().getExternalFilesDir(null), "video.mp4");
         mMediaRecorder.setOutputFile(mVideoFile.getAbsolutePath());
-        mMediaRecorder.setOrientationHint(calculatePreviewRotation());
+        int previewRotation = calculatePreviewRotation();
+        if (mCameraInfo.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
+            if(previewRotation == 90){
+                previewRotation = 270;
+            }else if(previewRotation == 270){
+                previewRotation = 90;
+            }
+        }
+        mMediaRecorder.setOrientationHint(previewRotation);
         mMediaRecorder.setVideoSize(mCaptureSize.getWidth(), mCaptureSize.getHeight());
 
-        switch (mCameraInfo.orientation) {
-            case SENSOR_ORIENTATION_DEFAULT_DEGREES:
-                mMediaRecorder.setOrientationHint(DEFAULT_ORIENTATION_HINTS.get(mDisplayOrientation));
-                break;
-            case SENSOR_ORIENTATION_INVERSE_DEGREES:
-                mMediaRecorder.setOrientationHint(INVERSE_ORIENTATION_HINTS.get(mDisplayOrientation));
-                break;
-        }
+//         switch (mCameraInfo.orientation) {
+//             case SENSOR_ORIENTATION_DEFAULT_DEGREES:
+//                 mMediaRecorder.setOrientationHint(DEFAULT_ORIENTATION_HINTS.get(mDisplayOrientation));
+//                 break;
+//             case SENSOR_ORIENTATION_INVERSE_DEGREES:
+//                 mMediaRecorder.setOrientationHint(INVERSE_ORIENTATION_HINTS.get(mDisplayOrientation));
+//                 break;
+//         }
     }
 
     public void setProfile(CamcorderProfile profile, boolean audioEnabled) {
